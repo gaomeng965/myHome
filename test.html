@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .parentDom {
+        border: 1px solid red;
+    }
+
+    .childDom {}
+</style>
+
+<body>
+    <div class="parentDom">
+        <div class="childDom">子级块元素</div>
+    </div>
+
+    <input type="text" id="changeNum">
+    <button onclick="toChinesNum()">点击</button>
+    <input type="text" id="newNum">
+    <script src="http://webresource.fws.qa.nt.ctripcorp.com/rescorpwebsiteonline/R1/Item.min/Nav/Nav_Header/Jquery.js?v=2">
+        var $ = jQuery;
+    </script>
+    <script>
+        var str = "Hello world!"
+        document.write(str.blink())
+
+        function Parent(name) {
+            this.name = name;
+        }
+        Parent.prototype.say = function (name) {
+            console.log("名字:" + this.name);
+        }
+        function Child(age) {
+            this.age = age;
+        }
+
+        Child.prototype = new Parent("小白");
+
+        // 创建一个child对象
+        var child1 = new Child(123);
+        console.log(child1.name);
+        console.log(child1.age);
+        child1.say();
+
+        function fn(n, min, max) { //可自定义区间取值
+            if (n && parseInt(n) > 1 && parseInt(n) < 32) {
+                // 对象 变量用以去重，
+                var obj = {}; var arr = []; var str;
+                for (var i = 0; i < n; i++) {
+                    str = Math.floor(Math.random() * ((max - min + 1) || 31) + (min || 2));
+                    if (!obj[str]) {
+                        obj[str] = true;
+                        arr.push(str);
+                    } else {
+                        i--;
+                    }
+                }
+                return arr;
+            } else {
+                return "请输入正确的数字！(1~31)";
+            }
+        }
+        console.log(fn(20));
+
+
+        console.log("---------findIndex()------------");
+
+        var newFn = fn(20).findIndex(function (e, i, arr) {
+            console.log("this " + this);
+            console.log("e " + e);
+            console.log("i " + i);
+            console.log("arr " + arr);
+            return e % 2 == 0;
+        });
+        console.log("newFn=" + newFn);
+
+
+        console.log("---------some()------------");
+
+        function myFunction(age, index, arr) {
+            console.log("index=" + index + "  arr=" + arr)
+            return age < 10;
+        }
+        console.log(fn(10).some(myFunction));
+
+        console.log("---------call------------");
+        // 通过在call方法，给第一个参数添加要把b添加到哪个环境中，简单来说，this就会指向那个对象。
+        var a = {
+            user: "追梦子",
+            fn: function (e, ee) {
+                console.log(this.user); //追梦子
+                console.log(e);
+                console.log(ee);
+            }
+        }
+        var b = a.fn;
+        b(); //undefined
+        b.call(a);
+        b.call(a, 1, 2);
+
+        console.log("--------apply()------")
+        // 第二个参数必须是个数组
+        var a = {
+            user: "追梦子",
+            fn: function (e, ee) {
+                console.log(this.user); //追梦子
+                console.log(e);
+                console.log(ee);
+            }
+        }
+        var b = a.fn;
+        b.apply(a, [10, 1]);
+
+        // 注意参数为null的时候，this指向window
+        var a = {
+            user: "追梦子",
+            fn: function () {
+                console.log(this);
+            }
+        }
+
+        var b = a.fn;
+        b.apply(null);
+
+        console.log("-----------bind()----------")
+        // bind方法返回的是一个修改过后的函数。
+        var a = {
+            user: "追梦子",
+            fn: function (e, d, f) {
+                console.log(this.user);
+                console.log(e, d, f); //10 1 2
+            }
+        }
+        var b = a.fn;
+        b.bind(a);
+        console.log("b.bind(a) = " + b.bind(a));
+        console.log("b.bind(a)() = " + b.bind(a)());
+        // 同样bind也可以有多个参数，并且参数可以执行的时候再次添加，但是要注意的是，参数是按照形参的顺序进行的。
+        var c = b.bind(a, 10);
+        c(1, 2);
+
+
+        // const toChineseNum = (num) => {
+        //     const unit = ['', '十', '百', '千']
+        //     const counts = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+
+        //     const pre = Math.floor(num / 10000)
+        //     const next = num % 10000
+
+        //     let getfour = (mynum, flag = false) => {
+        //         if (!mynum) { return '' }
+        //         let i = 0, str = ''
+
+        //         while (flag ? i < 4 : mynum > 0) {
+        //             count = mynum % 10
+        //             mynum = Math.floor(mynum / 10)
+        //             str = (count ? counts[count] + unit[i] : str[0] == '零' ? '' : str.length && i ? '零' : '') + str
+        //             i++
+        //         }
+        //         return str
+        //     }
+
+        //     return pre ? getfour(pre) + '万' + getfour(next, true) : getfour(num)
+        // }
+
+        // console.log(toChineseNum(212));
+
+        //完成将 toChineseNum， 可以将数字转换成中文大写的表示，处理到万级别，例如 toChineseNum(12345)，返回 一万二千三百四十五。
+        // const toChinesNum = () => {
+        //     let $ = jQuery;
+        //     let num = $("#changeNum").val();
+        //     let haveNum = "";
+        //     let changeNum = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']; //changeNum[0] = "零"
+        //     let unit = ["", "十", "百", "千", "万"];
+        //     num = parseInt(num);
+        //     let getWan = (temp) => {
+        //         let strArr = temp.toString().split("").reverse();
+        //         let newNum = "";
+        //         for (var i = 0; i < strArr.length; i++) {
+        //             newNum = (i == 0 && strArr[i] == 0 ? "" : (i > 0 && strArr[i] == 0 && strArr[i - 1] == 0 ? "" : changeNum[strArr[i]] + (strArr[i] == 0 ? unit[0] : unit[i]))) + newNum;
+        //         }
+        //         return newNum;
+        //     }
+        //     let overWan = Math.floor(num / 10000);
+        //     let noWan = num % 10000;
+        //     if (noWan.toString().length < 4) noWan = "0" + noWan;
+        //     haveNum = overWan ? getWan(overWan) + "万" + getWan(noWan) : getWan(num);
+        //     $("#newNum").val(haveNum)
+        // }
+
+        // ES6方法
+        const toChineseNum = (num) => {
+            // TODO
+            let str = '零一二三四五六七八九',
+                str2 = ['', '十', '百', '千'];
+            let Clu = Array.from([...num.toString()].reverse(),
+                (v, i) => str[v] + (i == 4 ? '万' : (v == 0 ? '' : str2[i % 4]))).reverse().join('')
+                .replace(/零+/g, '零')
+                .replace(/(零+$)/, '')
+                .replace(/零+(?=万)/, '');
+            return Clu;
+        }
+
+        // 请你完成一个 safeGet 函数，可以安全的获取无限多层次的数据，一旦数据不存在不会报错，会返回 undefined，例如：var data = { a: { b: { c: 'ScriptOJ' } } } , data.a.b.c.d
+        const safeGet = (data, path) => {
+            if (!path) return undefined;
+            var arr = path.split(".");
+            try {
+                while(arr.length) {
+                    data = data[arr.shift()];
+                }
+            }catch(err) {
+                return undefined;
+            }
+            return data;
+        }
+
+        function parent () {
+            var chenckthis;
+            function child () {
+                chenckthis= this;
+                this.chenckstr = "里层";
+            }
+            child();
+            var checkthat = this;
+            console.log(checkthat== chenckthis);
+            console.log(this.chenckstr);
+        }
+        parent();
+    </script>
+
+</body>
+
+</html>
