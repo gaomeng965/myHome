@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>html5</title>
+<style>
+    .decoration {
+        font-size: 16px;
+        font-family: serif;
+        -webkit-text-fill-color: black;
+        -webkit-text-stroke-color: red;
+        -webkit-text-stroke-width: 2.75px;
+    }
+    .multi_column_style{
+        column-count: 3;
+        column-rule: 1px solid #bbb;
+        column-gap: 2em;
+    }
+    .gradient{
+        width: 300px;
+        height: 30px;
+        background-image: -webkit-gradient(linear, 0% 0%,100% 0%, from(#2A8BBE) to (#FE280E))
+    }
+</style>
+<link rel="stylesheet" href="">
+<script src=""></script>
+<header>
+    <hgroup>
+        <h1> Recall Fan Page </h1>
+        <h2> Only for people who want the memory of a lifetime. </h2>
+    </hgroup>
+</header>
+<p>标记元素，可以当做高亮标签，和用户当前的行动相关， 比如：
+    <mark style="background-color: red">Open your Mind</mark>.</p>
+
+<figure>
+    <img src="./timg (4).jpg" alt="蒙奇D路飞">
+    <figcaption>
+        <p> 图片元素 </p>
+    </figcaption>
+</figure>
+<small>小字定义，网站底部版权文字信息</small>
+<br>
+<form action="" method="post">
+    <label for="someInput1"> 你的名字：</label>
+    <input type="text" id="someInput1" name="someInput" required placeholder="必填"><br>
+    <button type="submit">Go</button>
+</form>
+<br><br>
+<input type="text" autofocus>
+<br><br> 当使用&lt;audio&gt;元素时请记得包含两种音频格式。FireFox想要.ogg格式的文件，而Webkit浏览器则需要.mp3格式的。和往常一样，IE是不支持的，且Opera 10及以下版本只支持.wav格式。
+<br><br>
+<audio autoplay="autoplay" controls="controls">
+    <source src="file.org">
+    <source src="file.mp3" <a href="file.mp3">Download</a>>
+</audio>
+<br><br> HTML5中不仅有&lt;audio&gt;元素，而且还有&lt;video&gt;。然而，和&lt;audio&gt;类似，HTML5中并没有指定视频解码器，它留给了浏览器来决定。虽然Safari和Internet Explorer9可以支持H.264格式的视频，Firefox和Opera是坚持开源Theora
+和Vorbis格式。因此，指定HTML5的视频时，你必须提供这两种格式。
+<br><br>
+<video controls preload>
+    <source src="file.mp4" type="video/mp4" codecs='avc1.42E01E, mp4a.40.2'>
+    <source src="file.ogv" type="video/ogv" codecs='vorbis, theora'>
+    <p>浏览器不支持<a href="file.mp4">Download</a></p>
+</video>
+<br><br>
+<form action="" method="post">
+    <input type="text" name="country_code" pattern="[A-z]{3}" title="Three letter country code" />
+    <input type="submit" />
+</form>
+
+<br><br><br>
+<div contenteditable="true" style="width:500px;height:200px;border: 1px solid;"></div>
+
+<div class="decoration">
+    文本渲染效果 </div>
+
+<div class="multi_column_style">
+        这里我们还是以 webkit 内核浏览器为例：
+        Column-count：表示布局几列。
+        Column-rule：表示列与列之间的间隔条的样式
+        Column-gap：表示列于列之间的间隔
+        这里我们还是以 webkit 内核浏览器为例：
+        Column-count：表示布局几列。
+        Column-rule：表示列与列之间的间隔条的样式
+        Column-gap：表示列于列之间的间隔
+        这里我们还是以 webkit 内核浏览器为例：
+        Column-count：表示布局几列。
+        Column-rule：表示列与列之间的间隔条的样式
+        Column-gap：表示列于列之间的间隔
+</div>
+<div class="gradient"></div>
+</html>
