@@ -11,7 +11,7 @@
     .parentDom {
         border: 1px solid red;
     }
-
+    
     .childDom {}
 </style>
 
@@ -23,7 +23,7 @@
     <input type="text" id="changeNum">
     <button onclick="toChineseNum()">dtt</button>
     <input type="text" id="newNum">
-    <script src="http://webresource.fws.qa.nt.ctripcorp.com/rescorpwebsiteonline/R1/Item.min/Nav/Nav_Header/Jquery.js?v=2">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
         var $ = jQuery;
     </script>
     <script>
@@ -33,9 +33,10 @@
         function Parent(name) {
             this.name = name;
         }
-        Parent.prototype.say = function (name) {
+        Parent.prototype.say = function(name) {
             console.log("名字:" + this.name);
         }
+
         function Child(age) {
             this.age = age;
         }
@@ -51,7 +52,9 @@
         function fn(n, min, max) { //可自定义区间取值
             if (n && parseInt(n) > 1 && parseInt(n) < 32) {
                 // 对象 变量用以去重，
-                var obj = {}; var arr = []; var str;
+                var obj = {};
+                var arr = [];
+                var str;
                 for (var i = 0; i < n; i++) {
                     str = Math.floor(Math.random() * ((max - min + 1) || 31) + (min || 2));
                     if (!obj[str]) {
@@ -71,7 +74,7 @@
 
         console.log("---------findIndex()------------");
 
-        var newFn = fn(20).findIndex(function (e, i, arr) {
+        var newFn = fn(20).findIndex(function(e, i, arr) {
             console.log("this " + this);
             console.log("e " + e);
             console.log("i " + i);
@@ -93,7 +96,7 @@
         // 通过在call方法，给第一个参数添加要把b添加到哪个环境中，简单来说，this就会指向那个对象。
         var a = {
             user: "追梦子",
-            fn: function (e, ee) {
+            fn: function(e, ee) {
                 console.log(this.user); //追梦子
                 console.log(e);
                 console.log(ee);
@@ -105,10 +108,10 @@
         b.call(a, 1, 2);
 
         console.log("--------apply()------")
-        // 第二个参数必须是个数组
+            // 第二个参数必须是个数组
         var a = {
             user: "追梦子",
-            fn: function (e, ee) {
+            fn: function(e, ee) {
                 console.log(this.user); //追梦子
                 console.log(e);
                 console.log(ee);
@@ -120,7 +123,7 @@
         // 注意参数为null的时候，this指向window
         var a = {
             user: "追梦子",
-            fn: function () {
+            fn: function() {
                 console.log(this);
             }
         }
@@ -129,10 +132,10 @@
         b.apply(null);
 
         console.log("-----------bind()----------")
-        // bind方法返回的是一个修改过后的函数。
+            // bind方法返回的是一个修改过后的函数。
         var a = {
             user: "追梦子",
-            fn: function (e, d, f) {
+            fn: function(e, d, f) {
                 console.log(this.user);
                 console.log(e, d, f); //10 1 2
             }
@@ -212,24 +215,25 @@
             if (!path) return undefined;
             var arr = path.split(".");
             try {
-                while(arr.length) {
+                while (arr.length) {
                     data = data[arr.shift()];
                 }
-            }catch(err) {
+            } catch (err) {
                 return undefined;
             }
             return data;
         }
 
-        function parent () {
+        function parent() {
             var chenckthis;
-            function child () {
-                chenckthis= this;
+
+            function child() {
+                chenckthis = this;
                 this.chenckstr = "里层";
             }
             child();
             var checkthat = this;
-            console.log(checkthat== chenckthis);
+            console.log(checkthat == chenckthis);
             console.log(this.chenckstr);
         }
         parent();
